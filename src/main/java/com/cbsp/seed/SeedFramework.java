@@ -8,6 +8,8 @@ public class SeedFramework {
 	private ApacheHttpClient apacheHttpClient;
 	private ApachePOI apachePOI;
 	private CDriver cDriver;
+	private ChromeService chromeService;
+	private WDriver wDriver;
 	private DropDown dropDown;
 	private Element element;
 	private ExplicitWait explicitWait;
@@ -30,6 +32,14 @@ public class SeedFramework {
 	
 	public void initCDriver() {
 		cDriver = new CDriver();
+	}
+	
+	public void initChromeService() {
+		chromeService = new ChromeService();
+	}
+	
+	public void initWDriver() {
+		wDriver = new WDriver();
 	}
 	
 	public void initDropDown() {
@@ -82,6 +92,14 @@ public class SeedFramework {
 	
 	public CDriver getCDriver() {
 		return this.cDriver;
+	}
+	
+	public ChromeService getChromeService() {
+		return this.chromeService;
+	}
+	
+	public WDriver getWDriver() {
+		return this.wDriver;
 	}
 	
 	public DropDown getDropDown() {
