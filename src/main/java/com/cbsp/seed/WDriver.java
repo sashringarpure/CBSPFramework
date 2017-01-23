@@ -317,5 +317,164 @@ public class WDriver {
 		this.driver.get(url);
 	}
 	
+	public WebElement findElementById(String id) {
+		return driver.findElement(By.id(id));
+	}
+	
+	public WebElement findElementByClassName(String className) {
+		return driver.findElement(By.className(className));
+	}
+	
+	public WebElement findElementByCssSelector(String cssSelector) {
+		return driver.findElement(By.cssSelector(cssSelector));
+	}
+	
+	public WebElement findElementByLinkText(String linkText) {
+		return driver.findElement(By.linkText(linkText));
+	}
+	
+	public WebElement findElementByName(String name) {
+		return driver.findElement(By.name(name));
+	}
+	
+	public WebElement findElementByPartialLinkText(String linkText) {
+		return driver.findElement(By.partialLinkText(linkText));
+	}
+	
+	public WebElement findElementByTagName(String name) {
+		return driver.findElement(By.tagName(name));
+	}
+	
+	public WebElement findElementByXpath(String xpathExpression) {
+		return driver.findElement(By.xpath(xpathExpression));
+	}
+	
+	public WebElement findElementByFluentWaitAndClassName(final String className) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.className(className));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndCssSelector(final String selector) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.cssSelector(selector));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndId(final String id) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.id(id));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndLinkText(final String linkText) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.linkText(linkText));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndName(final String name) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.name(name));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndPartialLinkText(final String linkText) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.partialLinkText(linkText));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndTagName(final String name) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.tagName(name));
+			}
+		});
+	}
+	
+	public WebElement findElementByFluentWaitAndXpathExpression(final String xpathExpression) {
+		return this.wait.until(new Function<WebDriver, WebElement>() {
+			public WebElement apply(WebDriver driver) {
+				return driver.findElement(By.xpath(xpathExpression));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndClassName(final String className) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.className(className));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndCssSelector(final String selector) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.cssSelector(selector));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndId(final String id) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.id(id));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndLinkText(final String linkText) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.linkText(linkText));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndName(final String name) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.name(name));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndPartialLinkText(final String linkText) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.partialLinkText(linkText));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndTagName(final String name) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.tagName(name));
+			}
+		});
+	}
+	
+	public List<WebElement> findElementsByFluentWaitAndXpathExpression(final String xpathExpression) {
+		return this.wait.until(new Function<WebDriver, List<WebElement>>() {
+			public List<WebElement> apply(WebDriver driver) {
+				return driver.findElements(By.xpath(xpathExpression));
+			}
+		});
+	}
 	
 }
