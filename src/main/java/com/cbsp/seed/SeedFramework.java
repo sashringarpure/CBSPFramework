@@ -21,6 +21,8 @@ public class SeedFramework {
 	private RestAssured restAssured;
 	private SDriver sDriver;
 	private SnakeYaml snakeYaml;
+	private Assertions assertions;
+	private HtmlDriver htmlUnitDriver;
 	
 	public void initApacheHttpClient(String url) {
 		this.apacheHttpClient = new ApacheHttpClient(url);
@@ -80,6 +82,14 @@ public class SeedFramework {
 	
 	public void initSnakeYaml() {
 		snakeYaml = new SnakeYaml();
+	}
+	
+	public void initAssertions() {
+		assertions = new Assertions();
+	}
+	
+	public void initHtmlDriver() {
+		htmlUnitDriver = new HtmlDriver();
 	}
 
 	public ApacheHttpClient getApacheHttpClient() {
@@ -144,5 +154,13 @@ public class SeedFramework {
 	
 	public SnakeYaml getSnakeYaml() {
 		return this.snakeYaml;
+	}
+	
+	public Assertions getAssertions() {
+		return this.assertions;
+	}
+	
+	public HtmlDriver getHtmlDriver() {
+		return this.htmlUnitDriver;
 	}
 }
