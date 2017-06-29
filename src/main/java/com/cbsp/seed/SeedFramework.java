@@ -23,6 +23,7 @@ public class SeedFramework {
 	private SnakeYaml snakeYaml;
 	private Assertions assertions;
 	private HtmlDriver htmlUnitDriver;
+	private MiscUtils miscUtils;
 	
 	public void initApacheHttpClient(String url) {
 		this.apacheHttpClient = new ApacheHttpClient(url);
@@ -90,6 +91,10 @@ public class SeedFramework {
 	
 	public void initHtmlDriver() {
 		htmlUnitDriver = new HtmlDriver();
+	}
+	
+	public void initMiscUtils() {
+		miscUtils = new MiscUtils();
 	}
 
 	public ApacheHttpClient getApacheHttpClient() {
@@ -162,5 +167,9 @@ public class SeedFramework {
 	
 	public HtmlDriver getHtmlDriver() {
 		return this.htmlUnitDriver;
+	}
+	
+	public MiscUtils getMiscUtils() {
+		return this.miscUtils;
 	}
 }
