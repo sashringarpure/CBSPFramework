@@ -3,6 +3,9 @@ package com.cbsp.seed;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+
 public class SeedFramework {
 
 	private ApacheHttpClient apacheHttpClient;
@@ -89,6 +92,7 @@ public class SeedFramework {
 	}
 	
 	public void initHtmlDriver() {
+		//htmlUnitDriver = new HtmlDriver();
 		htmlUnitDriver = new HtmlDriver();
 	}
 
@@ -111,6 +115,7 @@ public class SeedFramework {
 	public WDriver getWDriver() {
 		return this.wDriver;
 	}
+	
 	
 	public DropDown getDropDown() {
 		return this.dropDown;
