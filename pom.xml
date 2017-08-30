@@ -93,5 +93,10 @@
       <artifactId>postgresql</artifactId>
       <version>42.1.4</version>
     </dependency>
+    <dependency>
+    <groupId>com.assertthat</groupId>
+    <artifactId>selenium-shutterbug</artifactId>
+    <version>0.6.1</version>
+</dependency>
   </dependencies>
 </project>
