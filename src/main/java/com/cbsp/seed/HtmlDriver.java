@@ -9,8 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebClient;
+
+import junit.framework.Assert;
 
 
 
@@ -197,4 +203,48 @@ public class HtmlDriver {
 	public org.openqa.selenium.WebDriver.TargetLocator switchTo() {
 		return this.htmlUnitDriver.switchTo();
 	}
+	public void elementSendKey(String id, String value) {
+		this.htmlUnitDriver.findElement(By.id(id)).sendKeys(value);
+	}
+	public void elementClick(String xpath) {
+		this.htmlUnitDriver.findElement(By.xpath(xpath)).click();;
+	}
+	
+	public void elementVisiable(String xpath, String text) {
+		String[] arrtext = text.split(" ");
+		
+		//bodyText.contain(keywords[n]);
+		
+		System.out.println("the compare text is " +text);
+		String bodyText = this.htmlUnitDriver.findElement(By.xpath(xpath)).getText();
+		System.out.println("the text is " +this.htmlUnitDriver.findElement(By.xpath(xpath)).getText());
+		System.out.println("");
+		
+		boolean result = true;
+		
+		for (String s: arrtext)
+		{
+			if (!bodyText.contains(s))
+			{
+				result = false;
+			}
+		}
+		
+		System.out.println("the result of contain is" + result);
+		
+		if(bodyText.contains(text))
+		  {
+		    System.out.println("Pass");
+		  }
+		else
+		  {
+		    System.out.println("Fail");
+		  }
+		
+		Assert.assertTrue("Text is not correct", result);
+		
+		
+	}
+
+	
 }
