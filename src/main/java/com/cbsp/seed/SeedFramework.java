@@ -24,6 +24,7 @@ public class SeedFramework {
 	private Assertions assertions;
 	private HtmlDriver htmlUnitDriver;
 	private MiscUtils miscUtils;
+	private JavaJDBC javaJDBC;
 	
 	public void initApacheHttpClient(String url) {
 		this.apacheHttpClient = new ApacheHttpClient(url);
@@ -97,6 +98,10 @@ public class SeedFramework {
 		miscUtils = new MiscUtils();
 	}
 
+	public void initJavaJDBC() {
+		javaJDBC = new JavaJDBC();
+	}
+	
 	public ApacheHttpClient getApacheHttpClient() {
 		return this.apacheHttpClient;
 	}
@@ -171,5 +176,9 @@ public class SeedFramework {
 	
 	public MiscUtils getMiscUtils() {
 		return this.miscUtils;
+	}
+	
+	public JavaJDBC getJavaJDBC() {
+		return this.javaJDBC;
 	}
 }
