@@ -31,6 +31,18 @@ public class JavaJDBC {
 		this.setAutoCommit = false;
 	}
 	
+	public JavaJDBC(String hostname, String dbname, String port, String user, String pass, boolean autocommit) {
+		this.connection = null;
+		this.statement = null;
+		this.resultset = null;
+		this.hostname = hostname;
+		this.port = port;
+		this.dbName = dbname;
+		this.username = user;
+		this.password = pass;
+		this.setAutoCommit = autocommit;
+	}
+	
 	public void setConnection(Connection connection) {
 		this.connection = connection;
 	}
