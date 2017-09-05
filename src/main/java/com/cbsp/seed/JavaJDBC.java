@@ -3,8 +3,10 @@ package com.cbsp.seed;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class JavaJDBC {
 	
@@ -109,7 +111,7 @@ public class JavaJDBC {
 				System.out.print(e.getStackTrace());
 				return;
 			} catch(Exception e) {
-				System.out.println("Unhandled exception.");
+				System.out.println("Unhandled exception while creating PSQL Driver.");
 				System.out.println(e.getMessage());
 				System.out.println(e.getStackTrace());
 				return;
@@ -129,7 +131,7 @@ public class JavaJDBC {
 				System.out.println(e.getStackTrace());
 				return;
 			} catch(Exception e) {
-				System.out.println("Unhandled exception.");
+				System.out.println("Unhandled exception while connecting to PSQL DB.");
 				System.out.println(e.getMessage());
 				System.out.println(e.getStackTrace());
 				return;
@@ -151,7 +153,7 @@ public class JavaJDBC {
 			System.out.println(e.getStackTrace());
 			return;
 		} catch(Exception e) {
-			System.out.println("Unhandled exception.");
+			System.out.println("Unhandled exception while creating statement.");
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 			return;
@@ -172,7 +174,7 @@ public class JavaJDBC {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		} catch(Exception e) {
-			System.out.println("Unhandled exception.");	
+			System.out.println("Unhandled exception executing DML/DDL.");	
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
@@ -193,12 +195,42 @@ public class JavaJDBC {
 			System.out.println(e.getStackTrace());
 			return resultset;
 		} catch(Exception e) {
-			System.out.println("Unhandled exception.");	
+			System.out.println("Unhandled exception while executing SQL.");	
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 			return resultset;
 		}
 			return resultset;
+	}
+	
+	public ArrayList<ArrayList> toArrayList(ResultSet rs) {
+		ArrayList<ArrayList> arrayList = new ArrayList<ArrayList>();
+		arrayList.clear();
+		try {
+			ArrayList<Object> rsCols = new ArrayList<Object>(rs.getMetaData().getColumnCount());
+			while (rs.next()) {
+				rsCols.clear();
+				for ( int col = 1 ; col <= rs.getMetaData().getColumnCount(); col++ ) {
+					rsCols.add(rs.getObject(col));
+				}
+				arrayList.add(rsCols);
+			}
+		} catch(SQLException e) {
+			System.out.println("Exception occurred while converting resultset to arraylist. ");
+			System.out.println(this.dbName);
+			System.out.println(this.hostname);
+			System.out.println(this.password);
+			System.out.println(this.port);
+			System.out.println(this.username);
+			System.out.println(this.PSQLDriver);
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		} catch(Exception e) {
+			System.out.println("Unhandled exception while converting resultset to arraylist.");	
+			System.out.println(e.getMessage());
+			System.out.println(e.getStackTrace());
+		}
+		return arrayList;	
 	}
 	
 	public void executeCommit() {
@@ -214,7 +246,7 @@ public class JavaJDBC {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		} catch(Exception e) {
-			System.out.println("Unhandled exception.");	
+			System.out.println("Unhandled exception while executing commit.");	
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
@@ -234,7 +266,7 @@ public class JavaJDBC {
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		} catch(Exception e) {
-			System.out.println("Unhandled exception.");	
+			System.out.println("Unhandled exception while closing resultset.");	
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 		}
@@ -254,7 +286,7 @@ public class JavaJDBC {
 			System.out.println(e.getStackTrace());
 			return;
 		} catch(Exception e) {
-			System.out.println("Unhandled exception.");
+			System.out.println("Unhandled exception while closing statement.");
 			System.out.println(e.getMessage());
 			System.out.println(e.getStackTrace());
 			return;
@@ -275,7 +307,7 @@ public class JavaJDBC {
 				System.out.println(e.getStackTrace());
 				return;
 		} catch(Exception e) {
-				System.out.println("Unhandled exception.");
+				System.out.println("Unhandled exception while closing connection.");
 				System.out.println(e.getMessage());
 				System.out.println(e.getStackTrace());
 				return;
