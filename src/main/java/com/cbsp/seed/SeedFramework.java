@@ -28,6 +28,7 @@ public class SeedFramework {
 	private HtmlDriver htmlUnitDriver;
 	private MiscUtils miscUtils;
 	private JavaJDBC javaJDBC;
+	private Logs logs;
 	
 	public void initApacheHttpClient(String url) {
 		this.apacheHttpClient = new ApacheHttpClient(url);
@@ -104,6 +105,10 @@ public class SeedFramework {
 
 	public void initJavaJDBC() {
 		javaJDBC = new JavaJDBC();
+	}
+	
+	public void initLogs() {
+		logs = new Logs();
 	}
 	
 	public ApacheHttpClient getApacheHttpClient() {
@@ -185,5 +190,9 @@ public class SeedFramework {
 	
 	public JavaJDBC getJavaJDBC() {
 		return this.javaJDBC;
+	}
+	
+	public Logs getLogs() {
+		return this.logs;
 	}
 }
