@@ -10,7 +10,7 @@ public class Logs {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static void startTestRun(String testCaseName) {
+	public static void startTestRun() {
 		Log.info("===========================================================================");
 		Log.info("===========================================================================");
 		Log.info("					starting new test run									 ");
@@ -21,7 +21,7 @@ public class Logs {
 	public static void startTestCase(String testCaseName) {
 		Log.info("===========================================================================");
 		Log.info("===========================================================================");
-		Log.info("					starting test :" + testCaseName + "						 ");
+		Log.info("					starting test : " + testCaseName + "						 ");
 		Log.info("===========================================================================");
 		Log.info("===========================================================================");		
 	}
