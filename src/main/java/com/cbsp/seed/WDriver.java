@@ -6,8 +6,12 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -15,6 +19,7 @@ import javax.imageio.ImageIO;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -31,12 +36,15 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.Wait;
-import org.testng.log4testng.Logger;
+
+
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 import com.assertthat.selenium_shutterbug.core.Shutterbug;
 import com.google.common.base.Function;
-
 
 
 import junit.framework.Assert;
@@ -45,7 +53,9 @@ public class WDriver {
 
 	private static WebDriver driver; 
 	private static File currentDirectory = new File("");
-	//private static Logger log = Logger.getLogger(driver);
+    //private static Logger log = Logger.getLogger(driver);
+	//private static Logger log = Logger.getLogger(WDriver.class) ;
+	private static Logger log;
 	private FluentWait<WebDriver> wait;
 	private int timeOut;
 	private int pollInterval;
@@ -68,6 +78,8 @@ public class WDriver {
 	 * @param url
 	 */
 	public void navigateTo(String url) {
+		
+	//	log.info("navigate to " + url);
 		this.driver.navigate().to(url);
 	}
 	
@@ -75,6 +87,7 @@ public class WDriver {
 	 * 
 	 */
 	public void QuitDriver() {
+		//log.info("End test suit");
 		this.driver.quit();
 	}
 	
@@ -92,6 +105,7 @@ public class WDriver {
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--kiosk");
 		driver = new ChromeDriver(chromeOptions);
+	//	log.info("Max the window");
 		
 	
 	}
@@ -106,12 +120,29 @@ public class WDriver {
 		waitTime();
 		driver.findElement(By.xpath(xpath)).clear();
 		this.driver.findElement(By.xpath(xpath)).sendKeys(value);
+	//	log.info("Insert the text: " +  value);
 	}
 	public void elementClick(String xpath) {
 	//	findElementByFluentWaitAndXPath(xpath);
 		waitTime();
+		String value =  driver.findElement(By.xpath(xpath)).getAttribute("value");
+		System.out.println("text is " + driver.findElement(By.xpath(xpath)).getAttribute("value")); 
+		System.out.println("text is " + driver.findElement(By.xpath(xpath)).getText()); 
+		String clickValue =  driver.findElement(By.xpath(xpath)).getText();
 		this.driver.findElement(By.xpath(xpath)).click();
+	//	log.info("Click " +clickValue);
 	}
+	
+	
+	public void findElement(String xpath) {
+		//	findElementByFluentWaitAndXPath(xpath);
+		 WebElement loginButton = this.driver.findElement(By.xpath(xpath));
+			waitTime();
+			System.out.println("The element is " + loginButton.getText());
+			loginButton.click();
+			this.driver.findElement(By.xpath(xpath));
+	}
+	
 	
 	
 	
@@ -128,7 +159,7 @@ public class WDriver {
 		System.out.println("");
 		
 		boolean result = true;
-		
+	
 		for (String s: arrtext)
 		{
 			if (!bodyText.contains(s))
@@ -150,6 +181,8 @@ public class WDriver {
 		
 		Assert.assertTrue("Text is not correct", result);
 		
+		//log.info("Check the elements " +  text + " is visible");
+		
 		
 	}
 	
@@ -161,7 +194,54 @@ public class WDriver {
 		Actions action = new Actions(this.driver);
 		action.moveToElement(link).build().perform();
 		Thread.sleep(1000);
-		this.driver.findElement(By.linkText(subElement)).click();;
+		this.driver.findElement(By.linkText(subElement)).click();
+		//log.info("Move mouseover a drop down menu and click the drop down value: " + subElement);
+	}
+	
+	public void randomSelectdropDown(String xpath) throws InterruptedException {
+		waitTime();
+		
+		WebElement drpDwnList = driver.findElement(By.xpath(xpath));
+		 //Using FindElements to create a List object
+		 
+		 //Using Select Class to fetch the count
+		 Select objSel = new Select(drpDwnList);
+		 List <WebElement> weblist = objSel.getOptions();
+		 //Taking the count of items
+		 int endOption = weblist.size();
+		 //Using Random class to generate random values
+		 Random num = new Random();
+		 int startOption = 1;
+		
+		 int iSelect = startOption + num .nextInt( endOption - startOption); 
+		 //Selecting value from DropDownList
+		 objSel.selectByIndex(iSelect);
+		 //Selected Value
+		 System.out.println("the drop down value is "+drpDwnList.getAttribute("value"));
+		// log.info("random select a drop down box value: " + drpDwnList.getAttribute("value"));
+	}
+	
+	public void randomSelectdropDownForYear(String xpath) throws InterruptedException {
+		waitTime();
+		
+		WebElement drpDwnList = driver.findElement(By.xpath(xpath));
+		 //Using FindElements to create a List object
+		 
+		 //Using Select Class to fetch the count
+		 Select objSel = new Select(drpDwnList);
+		 List <WebElement> weblist = objSel.getOptions();
+		 //Taking the count of items
+		 int endOption = weblist.size();
+		 //Using Random class to generate random values
+		 Random num = new Random();
+		 int startOption = 2;  //can't be this year
+		
+		 int iSelect = startOption + num .nextInt( endOption - startOption); 
+		 //Selecting value from DropDownList
+		 objSel.selectByIndex(iSelect);
+		 //Selected Value
+		 System.out.println(drpDwnList.getAttribute("value"));
+	//	 log.info("random select a drop down box value: " + drpDwnList.getAttribute("value"));
 	}
 	
 	
@@ -170,6 +250,10 @@ public class WDriver {
 		
 		this.wait = new FluentWait<WebDriver>(this.driver).withTimeout(timeOut, timeUnit).pollingEvery(pollInterval, timeUnit).ignoring(NoSuchElementException.class);
 		
+	}
+	
+	public void scrolldownpage() throws InterruptedException {
+		((JavascriptExecutor)this.driver).executeScript("scroll(0,400)");
 	}
 	
 	public FluentWait<WebDriver> getWait() {
@@ -271,6 +355,83 @@ public class WDriver {
 	    ImageIO.write(destImage, "png", screenshot);
 	    File file = new File("//path//to");
 	    FileUtils.copyFile(screenshot, file);
+	}
+	
+	public static String gettime()
+	{
+		Date dNow = new Date( );
+	    SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddhhmmss");
+
+	      System.out.println("Current Date: " + ft.format(dNow));
+		
+		return ft.format(dNow); 
+	}
+	
+	public static String getCreditcardNumber()
+	{
+		Date dNow = new Date( );
+	    SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMddhhmmss");
+	    Random rand = new Random();
+	    int randomCard = 3 + rand.nextInt(3);   //display credit card 3, 4 , 5
+	    int randomInteger = (int)(Math.random() * 9);
+	    String creditcard= randomCard + "" + randomInteger + ft.format(dNow);
+
+	      System.out.println("credit card: " + creditcard);
+		
+		return creditcard; 
+	}
+	
+	public static String getVISACreditcardNumber()
+	{
+		String card[] = {"4929349427826558", "4532220944133290", "4556118442234431",
+		   "4940988578651797", "4898959619596046", 
+			"4716665600226721", "4532757305711628", "4405613331491137", "4929790126600986", "4929538712955516",
+			"4929538712955516"
+		};
+		
+	    
+	    int randomInteger = (int)(Math.random() * card.length);
+	  //String creditcard= card[randomInteger];
+	   String creditcard =  "370894492001902";
+	      System.out.println("VISA credit card: " + creditcard);
+		
+		return creditcard; 
+	}
+	
+	/**
+	 * 
+	 * @param frameName
+	 */
+	public void switchToFrame(String frameName) {
+		waitTime();
+		WebElement iFrame= driver.findElement(By.xpath(frameName));
+		this.driver.switchTo().frame(iFrame);
+	}
+	
+	public void switchToNewWindow() {
+		waitTime();
+		Set handles = this.driver.getWindowHandles();
+		 
+        System.out.println(handles);
+
+        // Pass a window handle to the other window
+
+        for (String handle1 : driver.getWindowHandles()) {
+
+        	System.out.println("the new handle is " + handle1);
+
+        	driver.switchTo().window(handle1);
+
+        	}
+	}
+	
+	
+	public void switchToDefaultContent() {
+		this.driver.switchTo().defaultContent();
+	}
+	
+	public void switchToActiveElement() {
+		this.driver.switchTo().activeElement();
 	}
 
 
