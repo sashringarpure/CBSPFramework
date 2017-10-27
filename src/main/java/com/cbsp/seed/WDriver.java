@@ -143,6 +143,31 @@ public class WDriver {
 			this.driver.findElement(By.xpath(xpath));
 	}
 	
+	public String getText(String xpath) {
+		//	findElementByFluentWaitAndXPath(xpath);
+		 WebElement text = this.driver.findElement(By.xpath(xpath));
+			waitTime();
+			System.out.println("The element is " + text.getText());
+			return text.getText();
+	}
+	
+	public void checkingElement(String xpath) {
+		this.driver.findElement(By.xpath(xpath));
+	}
+	
+	public void findElementByNumber(String xpath) {
+		//	findElementByFluentWaitAndXPath(xpath);
+		 WebElement loginButton = this.driver.findElement(By.xpath(xpath));
+			waitTime();
+			System.out.println("The element is " + loginButton.getText());
+			System.out.println("The element size " + loginButton.getSize());
+			
+			this.driver.findElement(By.xpath(xpath));
+	}
+	
+	public void close() {
+		this.driver.close();
+	}
 	
 	
 	
