@@ -104,7 +104,16 @@ public class WDriver {
 		
 		ChromeOptions chromeOptions = new ChromeOptions();
 		chromeOptions.addArguments("--kiosk");
+		/*
+		chromeOptions.addArguments("--js-flags=--expose-gc");
+		chromeOptions.addArguments("--enable-precise-memory-info");
+		chromeOptions.addArguments("--disable-popup-blocking");
+		chromeOptions.addArguments("--disable-default-apps");
+		chromeOptions.addArguments("test-type=browser");    
+		chromeOptions.addArguments("disable-infobars");
+		*/
 		driver = new ChromeDriver(chromeOptions);
+		
 	//	log.info("Max the window");
 		
 	
@@ -231,7 +240,7 @@ public class WDriver {
 		 
 		 //Using Select Class to fetch the count
 		 Select objSel = new Select(drpDwnList);
-		 List <WebElement> weblist = objSel.getOptions();
+		 List <WebElement> weblist = objSel.getOptions(); 
 		 //Taking the count of items
 		 int endOption = weblist.size();
 		 //Using Random class to generate random values
