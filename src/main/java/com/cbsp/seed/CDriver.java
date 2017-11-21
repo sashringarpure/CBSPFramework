@@ -15,6 +15,7 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Keyboard;
@@ -29,6 +30,7 @@ import com.google.common.base.Function;
 public class CDriver {
 
 	private ChromeDriver cDriver;
+	//private WebDriver driver;
 	private Wait<ChromeDriver> wait;
 	
 	public CDriver() {
@@ -37,7 +39,8 @@ public class CDriver {
 	}
 	
 	public void setChromeDriver() {
-		System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver");
+		System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver 3");
+		//System.setProperty("webdriver.chrome.driver", "/Applications/chromedriver");
 		this.cDriver = new ChromeDriver();
 	}
 	
@@ -49,6 +52,8 @@ public class CDriver {
 	 * @param timeUnit
 	 */
 	public void setWait(ChromeDriver driver, int timeOut, int pollInterval, TimeUnit timeUnit) {
+		System.out.println("the line is " + timeOut + " " + pollInterval + " " + timeUnit);
+		
 		this.wait = new FluentWait<ChromeDriver>(driver).withTimeout(timeOut, timeUnit).pollingEvery(pollInterval, timeUnit).ignoring(NoSuchElementException.class);
 	}
 	
@@ -531,7 +536,6 @@ public class CDriver {
 	/**
 	 * 
 	 * @param xpath
-	 * @return an object representing a web element.
 	 */
 	public WebElement findElementByFluentWaitAndXPath(final String xpath) {
 		return this.wait.until(new Function<ChromeDriver, WebElement>() {
@@ -540,6 +544,8 @@ public class CDriver {
 			}
 		});
 	}
+	
+	
 	
 	/**
 	 * 
